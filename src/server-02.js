@@ -5,7 +5,6 @@ var router = require('./router-01');
 function start() {
   function onRequest(request, response) {
     var pathname = url.parse(request.url).pathname;
-
     console.log("Request for " + pathname + " received.");
 
     router.route(pathname);
