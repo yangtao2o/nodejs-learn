@@ -1,4 +1,5 @@
 const http = require('http');
+const qs = require('querystring');
 
 http.createServer(function(req, res) {
   if('/' == req.url) {
@@ -22,7 +23,10 @@ http.createServer(function(req, res) {
     req.on('end', function() {
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.end('<p>Content-type: '+ req.headers['content-type'] +'</p>'
-       + '<p>Data: '+ body +'</p>');
+       + '<p>Data: '+ qs.parse(body).name +'</p>');
     })
+  } else {
+    res.writeHead(404);
+    res.end('Not Found.');
   }
 }).listen(3000);

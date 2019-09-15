@@ -10,8 +10,15 @@
 * [【实战】用 express+MongoDB 搭建一个完整的前端项目](https://segmentfault.com/a/1190000015866331)
 * [基于Vue+express的博客项目](https://www.jianshu.com/p/92fa50ea0b84)
 
+## 学习书籍
+
+* 《了不起的 Node.js - 将 JavaScript进行到底》
+* 《新时期的 Node.js 入门》
+
 
 ## Node 相关
 * [node-blog-express-koa2](../../../node-blog-express-koa2)
 * [node-express-mongodb](../../../node-express-mongodb)
 * [node-express-spider](../../../node-express-spider)
+
+
