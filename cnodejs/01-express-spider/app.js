@@ -1,13 +1,18 @@
 const express = require('express')
 const superagent = require('superagent')
 const cheerio = require('cheerio')
+const morgan = require('morgan')
 
 const app = express()
 const PORT = process.env.PORT || 8000
 const URL = 'https://cnodejs.org'
+
+app.use(morgan('dev'))
+
 /**
  * 当在浏览器中访问 http://localhost:8000/ 时，输出 CNode(https://cnodejs.org/ ) 社区首页的所有帖子标题和链接，以 json 的形式。
  */
+
 app.get('/', (req, res, next) => {
   // 使用 superagent 获取 url
   superagent.get(URL, (err, sres) => {
@@ -27,7 +32,7 @@ app.get('/', (req, res, next) => {
       })
     })
 
-    console.log('items--->', items)  // 以 JSON 格式打印
+    console.log({items})  // 以 JSON 格式打印
 
     if(items) {
       $(items).each((i, item) => {

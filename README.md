@@ -5,10 +5,11 @@
 ## 学习资料
 
 * [Node.js 入门](https://cnodejs.org/getstart)
+* [《Node.js 包教不包会》](https://github.com/alsotang/node-lessons) -- by alsotang
 * [Node.js 官方文档](https://nodejs.org/en/)
 * [CNode：Node.js专业中文社区](https://cnodejs.org/)
-* [Express-4.x 官方指南](http://www.expressjs.com.cn/guide/routing.html)
 * [【全文】狼叔：如何正确的学习Node.js](https://segmentfault.com/a/1190000013933520)
+* [Express-4.x 官方指南](http://www.expressjs.com.cn/guide/routing.html)
 * [react全家桶+express实战个人博客系列教程](https://www.jianshu.com/p/406f6df0f916)
 * [详解如何从零开始搭建Express+Vue开发环境](https://www.jianshu.com/p/c65ecdcffed1)
 * [vue项目-前端Vue 后台express](https://www.jianshu.com/p/4940ae61b752)
@@ -34,6 +35,7 @@
 
 
 ## Node 相关
+* [npm package](https://github.com/yangtao2o/nodejs-learn/tree/master/cnodejs) 积累
 * [node-blog-express-koa2](../../../node-blog-express-koa2)
 * [node-express-mongodb](../../../node-express-mongodb)
 * [node-express-spider](../../../node-express-spider)
