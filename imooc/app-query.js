@@ -16,12 +16,12 @@ const server = http.createServer((req, res) => {
     query
   }
 
-  if(method === 'GET') {
+  if (method === 'GET') {
     res.end(
       JSON.stringify(resData)
     )
   }
-  if(method === 'POST') {
+  if (method === 'POST') {
     let postData = ''
     res.on('data', chunk => {
       postData += chunk.toString()
