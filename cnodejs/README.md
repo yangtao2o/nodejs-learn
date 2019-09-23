@@ -128,3 +128,23 @@ app.use(function (req, res) {
   res.end(JSON.stringify(req.body, null, 2))
 })
 ```
+
+## [cross-env](https://www.npmjs.com/package/cross-env)
+
+Run scripts that set and use environment variables across platforms.
+
+```json
+{
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js"
+  }
+}
+```
+
+## [nodemon](https://www.npmjs.com/package/nodemon)
+
+nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
+
+```bash
+nodemon ./server.js localhost 8080
+```

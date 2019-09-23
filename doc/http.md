@@ -17,6 +17,63 @@ http
 
 以上程序创建了一个 HTTP 服务器并监听 3000 端口，打开浏览器访问该端口`http://127.0.0.1:3000/`就能够看到效果。
 
+## Get/Post请求
+
+写一个简易的 get、post 请求：
+
+```js
+const http = require('http')
+const querystring = require('querystring')
+
+http.createServer((req, res) => {
+  const method = req.method
+  const url = req.url
+  // 获取 path
+  const path = url.split('?')[0]
+  // 解析 query
+  const query = querystring.parse(url.split('?')[1]) 
+  const resData = {
+    method,
+    url,
+    path,
+    query
+  }
+  // 设置返回格式为JSON
+  res.setHeader('Content-type', 'application/json')
+
+  if(method === 'GET') {
+    res.end(JSON.stringify(resData))
+  }
+
+  if(method === 'POST') {
+    let postData = ''
+
+    req.on('data', chunk => {
+      postData += chunk.toString()
+    })
+
+    req.on('end', () => {
+      resData.postData = postData
+      res.end(JSON.stringify(resData))
+    })
+  }
+}).listen(8000)
+```
+
+比如`POST`请求 `http://127.0.0.1:8000/api/blog?ip=1`，然后使用 Postman 工具测试结果如下：
+
+```json
+{
+  "method": "POST",
+  "url": "/api/blog?ip=1",
+  "path": "/api/blog",
+  "query": {
+      "ip": "1"
+  },
+  "postData": "{\n\t\"title\": \"你说什么\",\n\t\"content\": \"我知道你知道\"\n}"
+}
+```
+
 ## http
 
 [http](http://nodejs.cn/api/http.html) 模块提供两种使用方式：
@@ -193,7 +250,7 @@ http
 ```
 
 ```js
-url-parse Url {
+{
   protocol: null,
   slashes: null,
   auth: null,
@@ -205,7 +262,8 @@ url-parse Url {
   query: 'a=b',
   pathname: '/foo/bar',
   path: '/foo/bar?a=b',
-  href: '/foo/bar?a=b' }
+  href: '/foo/bar?a=b' 
+}
 ```
 
 format 方法允许将一个 URL 对象转换为 URL 字符串
@@ -259,6 +317,9 @@ net模块可用于创建Socket服务器或Socket客户端。
 
 答： 发起客户端HTTP请求前需要先创建一个客户端。http模块提供了一个全局客户端`http.globalAgent`，可以让我们使用`.request`或`.get`方法时不用手动创建客户端。但是全局客户端默认只允许5个并发Socket连接，当某一个时刻 HTTP 客户端请求创建过多，超过这个数字时，就会发生`socket hang up`错误。解决方法也很简单，通过`http.globalAgent.maxSockets`属性把这个数字改大些即可。另外，https 模块遇到这个问题时也一样通过`https.globalAgent.maxSockets`属性来处理。
 
-## 资料
-* [7-days-nodejs](http://nqdeng.github.io/7-days-nodejs/#1.1)
-* 《了不起的 Node.js》
+## 学习资料
+
+* [7-days-nodejs](http://nqdeng.github.io/7-days-nodejs/#1.1) - 文章
+* 《了不起的 Node.js：将 JavaScript 进行到底》- 书籍
+* 《新时期的 Node.js 入门》- 书籍
+* [Node.js从零开发Web Server博客项目 前端晋升全栈工程师必备](https://coding.imooc.com/class/320.html) - 视频

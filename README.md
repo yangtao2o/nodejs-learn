@@ -22,10 +22,12 @@
 * [理解 Promise 的工作原理](https://blog.coding.net/blog/how-do-promises-work)
 * [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
 
-## 学习书籍
+## 学习书籍|视频
 
-* 《了不起的 Node.js - 将 JavaScript进行到底》
-* 《新时期的 Node.js 入门》
+* [7-days-nodejs](http://nqdeng.github.io/7-days-nodejs/#1.1) - 文章
+* 《了不起的 Node.js：将 JavaScript 进行到底》- 书籍
+* 《新时期的 Node.js 入门》- 书籍
+* [Node.js从零开发Web Server博客项目 前端晋升全栈工程师必备](https://coding.imooc.com/class/320.html) - 视频
 
 ## 周边大咖
 
@@ -33,11 +35,14 @@
 * @justjavac 大神的[免费的计算机编程类中文书籍](https://github.com/justjavac/free-programming-books-zh_CN/#%E7%BD%AE%E9%A1%B6)
 * [【知乎Live】狼叔：如何正确的学习Node.js](https://github.com/i5ting/How-to-learn-node-correctly)
 
+## 学习日志
+
+* [npm package](https://github.com/yangtao2o/nodejs-learn/tree/master/cnodejs) 积累
 
 ## Node 相关
-* [npm package](https://github.com/yangtao2o/nodejs-learn/tree/master/cnodejs) 积累
-* [node-blog-express-koa2](../../../node-blog-express-koa2)
-* [node-express-mongodb](../../../node-express-mongodb)
-* [node-express-spider](../../../node-express-spider)
+
+* [node-blog-express-koa2](https://github.com/yangtao2o/node-blog-express-koa2)
+* [node-express-mongodb](https://github.com/yangtao2o/node-express-mongodb)
+* [node-express-spider](https://github.com/yangtao2o/node-express-spider)
 
 

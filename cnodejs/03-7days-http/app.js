@@ -1,44 +1,49 @@
 const http = require('http')
-const url = require('url')
+const querystring = require('querystring')
 
-http.get('http://www.example.com/', function (response) {
-    var body = [];
+http.createServer((req, res) => {
+  const method = req.method
+  const url = req.url
+  const path = url.split('?')[0]
+  const query = querystring.parse(url.split('?')[1]) 
+  const resData = {
+    method,
+    url,
+    path,
+    query
+  }
 
-    console.log(response.statusCode);
-    console.log(response.headers);
+  res.setHeader('Content-type', 'application/json')
 
-    response.on('data', function (chunk) {
-        body.push(chunk);
-    });
+  if(method === 'GET') {
+    res.end(JSON.stringify(resData))
+  }
 
-    response.on('end', function () {
-        body = Buffer.concat(body);
-        console.log('body: ', body.toString());
-    });
-});
+  // 比如请求 http://127.0.0.1:8000/api/blog?ip=1
 
+  // {
+  //   "method": "POST",
+  //   "url": "/api/blog?ip=1",
+  //   "path": "/api/blog",
+  //   "query": {
+  //       "ip": "1"
+  //   },
+  //   "postData": "{\n\t\"title\": \"你说什么\",\n\t\"content\": \"我知道你知道\"\n}"
+  // }
 
+  if(method === 'POST') {
+    let postData = ''
 
-http.createServer((request, response) => {
-  let body = []
-  const tmp = request.url
-
-  console.log('url-parse', url.parse(tmp))
-  response.writeHead(200, {'Content-Type': 'text/plain'})
-
-  console.log('Url: ', request.url)
-  console.log('Method: ', request.method)
-  console.log('Headers: ', request.headers)
-
-  request.on('data', (chunk) => {
-    body.push(chunk)
-  })
-
-  request.on('end', () => {
-    body = Buffer.concat(body);
-    console.log(body.toString());
-  })
+    req.on('data', chunk => {
+      postData += chunk.toString()
+    })
 
 
-  response.end('Hello World')
+    req.on('end', () => {
+      resData.postData = postData
+      res.end(JSON.stringify(resData))
+    })
+  }
+
+
 }).listen(8000)
