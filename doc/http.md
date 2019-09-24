@@ -1,25 +1,108 @@
-# HTTP
+# HTTP 服务
 
 > 超文本传输协议，是一种 Web 协议，属于 TCP 上层的协议。
+
+HTTP 模块式 Node 的核心模块，主要提供了一系列用于网络传输的 API。
+
+## 创建 HTTP 服务器
 
 使用 NodeJS 内置的 http 模块简单实现一个 HTTP 服务器:
 
 ```js
 const http = require("http");
 
-http
-  .createServer((request, response) => {
-    response.writeHead(200, { "Content-Type": "text/html" });
-    response.end("Hello World!");
-  })
-  .listen(3000);
+http.createServer((request, response) => {
+  response.writeHead(200, { "Content-Type": "text/plain" });
+  response.end("Hello World!");
+}).listen(3000);
 ```
 
 以上程序创建了一个 HTTP 服务器并监听 3000 端口，打开浏览器访问该端口`http://127.0.0.1:3000/`就能够看到效果。
 
-## Get/Post请求
+使用 createServer 创建一个 HTTP 服务器，该方法返回一个 http.server 类的实例。
 
-写一个简易的 get、post 请求：
+createServer 方法包含了一个匿名的回调函数，该函数有两个参数 request，response，它们是 IncomingMessage 和 ServerResponse 的实例。
+
+分别表示 HTTP 的 request 和 response 对象，当服务器创建完成后，Node进程开始循环监听 3000 端口。
+
+http.server 类定义了一系列的事件，如 connection 和 request 事件。
+
+## 处理 HTTP 请求
+
+### method，URL 和 header
+
+Node 将相关的信息封装在一个对象（request）中，该对象是 IncomingMessage 的实例。
+
+获取 method、URL：
+
+```js
+const method = req.method
+const url = req.url
+```
+
+比如访问`http://127.0.0.1:8000/index.html?name=tao`，就会输出：
+
+```json
+{
+  "method":"GET",
+  "url":"/index.html?name=tao"
+}
+```
+
+URL 的值为去除网站服务器地址之外的完整值。
+
+### header
+
+获取 HTTP header 信息：
+
+```js
+const headers = req.headers
+const userAgent = headers['user-agent']
+```
+
+输出：
+
+```json
+{
+  "headers": {
+    "host": "127.0.0.1:8000",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:68.0) Gecko/20100101 Firefox/68.0",
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "accept-language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
+    "accept-encoding": "gzip, deflate",
+    "connection": "keep-alive",
+    "upgrade-insecure-requests": "1",
+    "cache-control": "max-age=0"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:68.0) Gecko/20100101 Firefox/68.0"
+}
+```
+
+header 是一个 JSON 对象，可以对属性名进行单独索引。
+
+### request body
+
+Node 使用 stream 处理 HTTP 的请求体，并且注册了两个事件：data 和 end。
+
+获取完整的 HTTP 内容体：
+
+```js
+let body = []
+
+request.on('data', chunk => {
+  body.push(chunk)
+})
+
+request.on('end', () => {
+  body = Buffer.concat(body).toString()
+})
+```
+
+## Response 对象
+
+## get/post 请求
+
+综上所述，我们来组织一个简易的 get、post 请求实例：
 
 ```js
 const http = require('http')
@@ -28,17 +111,19 @@ const querystring = require('querystring')
 http.createServer((req, res) => {
   const method = req.method
   const url = req.url
-  // 获取 path
   const path = url.split('?')[0]
-  // 解析 query
   const query = querystring.parse(url.split('?')[1]) 
+  const headers = req.headers
+  const userAgent = headers['user-agent']
   const resData = {
     method,
     url,
     path,
-    query
+    query,
+    headers,
+    userAgent
   }
-  // 设置返回格式为JSON
+
   res.setHeader('Content-type', 'application/json')
 
   if(method === 'GET') {
@@ -46,31 +131,43 @@ http.createServer((req, res) => {
   }
 
   if(method === 'POST') {
-    let postData = ''
+    let postData = []
 
     req.on('data', chunk => {
-      postData += chunk.toString()
+      postData.push(chunk)
     })
 
     req.on('end', () => {
-      resData.postData = postData
+      resData.postData = Buffer.concat(postData).toString()
       res.end(JSON.stringify(resData))
     })
   }
 }).listen(8000)
 ```
 
-比如`POST`请求 `http://127.0.0.1:8000/api/blog?ip=1`，然后使用 Postman 工具测试结果如下：
+比如`POST`请求 `http://127.0.0.1:8000/api/blog?ip=2`，然后使用 Postman 工具测试结果如下：
 
 ```json
 {
-  "method": "POST",
-  "url": "/api/blog?ip=1",
-  "path": "/api/blog",
-  "query": {
-      "ip": "1"
-  },
-  "postData": "{\n\t\"title\": \"你说什么\",\n\t\"content\": \"我知道你知道\"\n}"
+    "method": "POST",
+    "url": "/api/blog?ip=2",
+    "path": "/api/blog",
+    "query": {
+        "ip": "2"
+    },
+    "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-cache",
+        "postman-token": "9e6cb382-8551-4a3f-b352-0581bb377cbc",
+        "user-agent": "PostmanRuntime/7.6.0",
+        "accept": "*/*",
+        "host": "127.0.0.1:8000",
+        "accept-encoding": "gzip, deflate",
+        "content-length": "62",
+        "connection": "keep-alive"
+    },
+    "userAgent": "PostmanRuntime/7.6.0",
+    "postData": "{\n\t\"title\": \"你说什么\",\n\t\"content\": \"我知道你知道\"\n}"
 }
 ```
 

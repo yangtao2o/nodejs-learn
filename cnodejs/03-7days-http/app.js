@@ -6,11 +6,15 @@ http.createServer((req, res) => {
   const url = req.url
   const path = url.split('?')[0]
   const query = querystring.parse(url.split('?')[1]) 
+  const headers = req.headers
+  const userAgent = headers['user-agent']
   const resData = {
     method,
     url,
     path,
-    query
+    query,
+    headers,
+    userAgent
   }
 
   res.setHeader('Content-type', 'application/json')
@@ -19,31 +23,16 @@ http.createServer((req, res) => {
     res.end(JSON.stringify(resData))
   }
 
-  // 比如请求 http://127.0.0.1:8000/api/blog?ip=1
-
-  // {
-  //   "method": "POST",
-  //   "url": "/api/blog?ip=1",
-  //   "path": "/api/blog",
-  //   "query": {
-  //       "ip": "1"
-  //   },
-  //   "postData": "{\n\t\"title\": \"你说什么\",\n\t\"content\": \"我知道你知道\"\n}"
-  // }
-
   if(method === 'POST') {
-    let postData = ''
+    let postData = []
 
     req.on('data', chunk => {
-      postData += chunk.toString()
+      postData.push(chunk)
     })
 
-
     req.on('end', () => {
-      resData.postData = postData
+      resData.postData = Buffer.concat(postData).toString()
       res.end(JSON.stringify(resData))
     })
   }
-
-
 }).listen(8000)
