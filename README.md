@@ -2,10 +2,18 @@
 
 > Node.js® is a JavaScript runtime built on `Chrome's V8 JavaScript engine`. Node.js uses an `event-driven`, `non-blocking I/O model` that makes it lightweight and efficient. Node.js' package ecosystem, `npm`, is the largest ecosystem of open source libraries in the world.
 
+## 学习书籍|视频
+
+* [菜鸟教程](https://www.runoob.com/nodejs/nodejs-tutorial.html) - 文档
+* [7-days-nodejs](http://nqdeng.github.io/7-days-nodejs/#1.1) - 文章
+* [《Node.js 包教不包会》](https://github.com/alsotang/node-lessons) -- 文章
+* 《了不起的 Node.js：将 JavaScript 进行到底》- 书籍
+* 《新时期的 Node.js 入门》- 书籍
+* [Node.js从零开发Web Server博客项目 前端晋升全栈工程师必备](https://coding.imooc.com/class/320.html) - 视频
+
 ## 学习资料
 
 * [Node.js 入门](https://cnodejs.org/getstart)
-* [《Node.js 包教不包会》](https://github.com/alsotang/node-lessons) -- by alsotang
 * [Node.js 官方文档](https://nodejs.org/en/)
 * [CNode：Node.js专业中文社区](https://cnodejs.org/)
 * [【全文】狼叔：如何正确的学习Node.js](https://segmentfault.com/a/1190000013933520)
@@ -21,13 +29,6 @@
 * [Node.js最新技术栈之Promise篇](https://cnodejs.org/topic/560dbc826a1ed28204a1e7de) - 2015
 * [理解 Promise 的工作原理](https://blog.coding.net/blog/how-do-promises-work)
 * [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
-
-## 学习书籍|视频
-
-* [7-days-nodejs](http://nqdeng.github.io/7-days-nodejs/#1.1) - 文章
-* 《了不起的 Node.js：将 JavaScript 进行到底》- 书籍
-* 《新时期的 Node.js 入门》- 书籍
-* [Node.js从零开发Web Server博客项目 前端晋升全栈工程师必备](https://coding.imooc.com/class/320.html) - 视频
 
 ## 周边大咖
 
