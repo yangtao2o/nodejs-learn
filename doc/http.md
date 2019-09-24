@@ -4,6 +4,16 @@
 
 HTTP 模块式 Node 的核心模块，主要提供了一系列用于网络传输的 API。
 
+HTTP 消息头如下所示(键是小写的，值不能被修改)：
+```json
+{ 'content-length': '123',
+  'content-type': 'text/plain',
+  'connection': 'keep-alive',
+  'host': 'mysite.com',
+  'accept': '*/*' 
+}
+```
+
 ## 创建 HTTP 服务器
 
 使用 NodeJS 内置的 http 模块简单实现一个 HTTP 服务器:
@@ -290,29 +300,35 @@ process.stdin.on("data", function(name) {
 
 ## HTTPS
 
-https 模块与 http 模块极为类似，区别在于 https 模块需要额外处理 SSL 证书
+HTTPS 是基于 TLS/SSL 的 HTTP 协议。在 Node.js 中，作为一个单独的模块实现。
+
+HTTPS 模块与 HTTP 模块极为类似，区别在于 HTTPS 模块需要额外处理 SSL 证书。
 
 ```js
+const https = require('https');
+const fs = require('fs');
+
 const options = {
-  key: fs.readFileSync("./ssl/default.key"),
-  cert: fs.readFileSync("./ssl/default.cer")
+  key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
+  cert: fs.readFileSync('test/fixtures/keys/agent2-cert.pem')
 };
 
-const server = https.createServer(options, function(request, response) {
-  // ...
-});
+https.createServer(options, (req, res) => {
+  res.writeHead(200);
+  res.end('hello world\n');
+}).listen(8000);
 ```
 
 ## URL
 
 处理 HTTP 请求时 url 模块使用率超高，因为该模块允许解析 URL、生成 URL，以及拼接 URL。
 
-首先我们来看看一个完整的 URL 的各组成部分。
+首先我们来看看一个完整的 URL 的各组成部分，输出如下：
 
 ```bash
-> url.parse('http://user:pass@host.com:8080/p/a/t/h?query=string#hash');
+> require('url').parse('http://user:pass@host.com:8080/p/a/t/h?query=string#hash');
 Url {
-  protocol: 'http:',
+  protocol: 'http:', 
   slashes: true,
   auth: 'user:pass',
   host: 'host.com:8080',
@@ -323,7 +339,7 @@ Url {
   query: 'query=string',
   pathname: '/p/a/t/h',
   path: '/p/a/t/h?query=string',
-  href: 'http://user:pass@host.com:8080/p/a/t/h?query=string#hash' }
+  href: 'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'}
 ```
 
 当然，不完整的 url，也可以解析：
@@ -346,7 +362,7 @@ http
   .listen(8000);
 ```
 
-```js
+```json
 {
   protocol: null,
   slashes: null,
@@ -420,3 +436,4 @@ net模块可用于创建Socket服务器或Socket客户端。
 * 《了不起的 Node.js：将 JavaScript 进行到底》- 书籍
 * 《新时期的 Node.js 入门》- 书籍
 * [Node.js从零开发Web Server博客项目 前端晋升全栈工程师必备](https://coding.imooc.com/class/320.html) - 视频
+* [http（HTTP）](http://nodejs.cn/api/http.html) - 官方文档
