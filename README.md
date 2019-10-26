@@ -38,6 +38,13 @@
 
 ## 学习日志
 
+* [Http](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/http.md)
+* [Tcp](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/tcp.md)
+* [Connect](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/connect.md)
+* [Event](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/event.md)
+* [Express-init](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/express-init.md)
+* [Express-spider](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/express-spider.md)
+* [Express-spider-more](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/express-spider-more.md)
 * [npm package](https://github.com/yangtao2o/nodejs-learn/tree/master/cnodejs) 积累
 
 ## Node 相关
