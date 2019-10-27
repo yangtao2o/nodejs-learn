@@ -2,6 +2,17 @@
 
 > Node.js® is a JavaScript runtime built on `Chrome's V8 JavaScript engine`. Node.js uses an `event-driven`, `non-blocking I/O model` that makes it lightweight and efficient. Node.js' package ecosystem, `npm`, is the largest ecosystem of open source libraries in the world.
 
+## 学习日志
+
+* [Http](./docs/http.md)
+* [Tcp](./docs/tcp.md)
+* [Connect](./docs/connect.md)
+* [Event](./docs/event.md)
+* [Express-init](./docs/express-init.md)
+* [Express-spider](./docs/express-spider.md)
+* [Express-spider-more](./docs/express-spider-more.md)
+* [npm package](./docs/npm-package.md) 积累
+
 ## 学习书籍|视频
 
 * [菜鸟教程](https://www.runoob.com/nodejs/nodejs-tutorial.html) - 文档
@@ -35,17 +46,6 @@
 * [wesome-nodejs](https://github.com/sindresorhus/awesome-nodejs)
 * @justjavac 大神的[免费的计算机编程类中文书籍](https://github.com/justjavac/free-programming-books-zh_CN/#%E7%BD%AE%E9%A1%B6)
 * [【知乎Live】狼叔：如何正确的学习Node.js](https://github.com/i5ting/How-to-learn-node-correctly)
-
-## 学习日志
-
-* [Http](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/http.md)
-* [Tcp](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/tcp.md)
-* [Connect](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/connect.md)
-* [Event](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/event.md)
-* [Express-init](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/express-init.md)
-* [Express-spider](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/express-spider.md)
-* [Express-spider-more](https://github.com/yangtao2o/nodejs-learn/blob/master/doc/express-spider-more.md)
-* [npm package](https://github.com/yangtao2o/nodejs-learn/tree/master/cnodejs) 积累
 
 ## Node 相关
 
