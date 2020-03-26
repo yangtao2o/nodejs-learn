@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSONP实现</title>
+  </head>
+  <body>
+    <h1>JSONP实现</h1>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      class Jsonp {
+        constructor(req) {
+          this.url = req.url;
+          this.callbackName = req.callbackName;
+        }
+        create() {
+          const script = document.createElement("script");
+          const url = `${this.url}?callback=${this.callbackName}`;
+          script.src = url;
+          document.getElementsByTagName("head")[0].appendChild(script);
+        }
+      }
+
+      // new Jsonp({
+      //   url: "http://127.0.0.1:8000/",
+      //   callbackName: "getMsg"
+      // }).create();
+
+      function getMsg(data) {
+        data = JSON.parse(data);
+        console.log(`My name is ${data.name}, and ${data.age} years old.`);
+      }
+
+      // function getAjaxData() {
+      //   $.ajax({
+      //     type: "get",
+      //     async: false,
+      //     url: "http://127.0.0.1:8000/",
+      //     dataType: "jsonp",
+      //     jsonp: "callback", //传递给请求处理程序或页面的，标识jsonp回调函数名(一般为:callback)
+      //     jsonpCallback: "getData", //callback的function名称
+      //     success: function(data) {
+      //       data = JSON.parse(data);
+      //       console.log(`My name is ${data.name}, and ${data.age} years old.`);
+      //     },
+      //     error: function() {
+      //       console.log("Error");
+      //     }
+      //   });
+      // }
+
+      function getAjaxData() {
+        const ajaxStatus = $.ajax({
+          type: "get",
+          async: false,
+          url: "http://127.0.0.1:8000/",
+          dataType: "jsonp",
+          jsonp: "callback",
+          jsonpCallback: "getData"
+        });
+
+        ajaxStatus.done(data => {
+          data = JSON.parse(data);
+          console.log(`My name is ${data.name}, and ${data.age} years old.`);
+        }).fail(err => {
+          console.log(err)
+        })
+      }
+      getAjaxData();
+    </script>
+  </body>
+</html>
