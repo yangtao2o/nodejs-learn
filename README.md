@@ -91,6 +91,7 @@ Node.js 事件驱动机制 + 异步 IO + 高性能 V8 引擎 ,也让它成为编
 - [Express-spider](https://github.com/yangtao2o/nodejs-learn/blob/master/docs/express-spider.md)
 - [Express-spider-more](https://github.com/yangtao2o/nodejs-learn/blob/master/docs/express-spider-more.md)
 - [npm package](https://github.com/yangtao2o/nodejs-learn/tree/master/cnodejs) 积累
+- [📦 5 个有趣的 Node.js 库,带你走进 彩色 Node.js 世界 🎉](https://github.com/yangtao2o/nodejs-learn/tree/master/node-util)
 
 ## Node 相关
 
