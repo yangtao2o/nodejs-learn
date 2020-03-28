@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A html</title>
+  </head>
+
+  <body>
+    <h1>Hi, this is A html.</h1>
+    <iframe
+      id="frame"
+      src="http://127.0.0.1:8001/b.html"
+      frameborder="0"
+      onload="load()"
+    ></iframe>
+    <script>
+      function load() {
+        let frame = document.getElementById("frame");
+        frame.contentWindow.postMessage("我很帅", "http://127.0.0.1:8001");
+        window.onmessage = function(event) {
+          console.log('From b.html data: ', event.data);
+        };
+      }
+      //otherWindow.postMessage(message, targetOrigin);
+      //otherWindow:指目标窗口，也就是给哪个window发消息，是 window.frames 属性的成员或者由 window.open 方法创建的窗口
+      //message:是要发送的消息，类型为 String、Object (IE8、9 不支持)
+      //targetOrigin: 是限定消息接收范围，不限制请使用'*'
+      //注意otherWindow和targetOrigin的区别
+    </script>
+  </body>
+</html>

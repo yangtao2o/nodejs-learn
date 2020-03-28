@@ -4,10 +4,10 @@ const querystring = require("querystring");
 const server = http.createServer((req, res) => {
   const url = req.url;
   const query = querystring.parse(url.split("?")[1]);
-  const { callback } = query;
+  const { name, age, callback } = query;
   const data = {
-    name: "Yang Min",
-    age: "8"
+    name,
+    age
   }
   res.end(`${callback}('${JSON.stringify(data)}')`);
 });

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A html</title>
+  </head>
+  <body>
+    <h1>Hi, this is A html.</h1>
+    <iframe
+      id="frame"
+      src="http://www.test.com:8001/b.html"
+      frameborder="0"
+      onload="load()"
+    ></iframe>
+    <script>
+      document.domain = "test.com"; //设置domain
+      function load() {
+        let frame = document.getElementById("frame");
+        console.log(frame.contentWindow.data); // This is b html content.
+      }
+    </script>
+  </body>
+</html>

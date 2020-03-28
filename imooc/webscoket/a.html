@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A html</title>
+  </head>
+  <body>
+    <script>
+      const socket = new WebSocket("ws://localhost:8080");
+
+      socket.addEventListener("open", function(event) {
+        console.log("Connection open ..."); 
+        socket.send("Hello Server!");
+      });
+
+      socket.addEventListener("message", function(event) {
+        console.log("Message from server: ", event.data);
+        socket.close();
+      });
+
+      socket.addEventListener("close", function(event) {
+        console.log("Connection closed.");
+      });
+    </script>
+  </body>
+</html>

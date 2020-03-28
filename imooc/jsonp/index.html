@@ -9,28 +9,23 @@
     <h1>JSONP实现</h1>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script>
-      class Jsonp {
-        constructor(req) {
-          this.url = req.url;
-          this.callbackName = req.callbackName;
-        }
-        create() {
-          const script = document.createElement("script");
-          const url = `${this.url}?callback=${this.callbackName}`;
-          script.src = url;
-          document.getElementsByTagName("head")[0].appendChild(script);
-        }
-      }
+      // class Jsonp {
+      //   constructor(req) {
+      //     this.url = req.url;
+      //     this.callbackName = req.callbackName;
+      //   }
+      //   create() {
+      //     const script = document.createElement("script");
+      //     const url = `${this.url}?callback=${this.callbackName}`;
+      //     script.src = url;
+      //     document.getElementsByTagName("head")[0].appendChild(script);
+      //   }
+      // }
 
       // new Jsonp({
       //   url: "http://127.0.0.1:8000/",
       //   callbackName: "getMsg"
       // }).create();
-
-      function getMsg(data) {
-        data = JSON.parse(data);
-        console.log(`My name is ${data.name}, and ${data.age} years old.`);
-      }
 
       // function getAjaxData() {
       //   $.ajax({
@@ -60,14 +55,59 @@
           jsonpCallback: "getData"
         });
 
-        ajaxStatus.done(data => {
-          data = JSON.parse(data);
-          console.log(`My name is ${data.name}, and ${data.age} years old.`);
-        }).fail(err => {
-          console.log(err)
-        })
+        ajaxStatus
+          .done(data => {
+            data = JSON.parse(data);
+            console.log(`My name is ${data.name}, and ${data.age} years old.`);
+          })
+          .fail(err => {
+            console.log(err);
+          });
       }
-      getAjaxData();
+      // getAjaxData();
+
+      function getMsg(data) {
+        data = JSON.parse(data);
+        console.log(`My name is ${data.name}, and ${data.age} years old.`);
+      }
+
+      const jsonp = ({ url, params, callbackName }) => {
+        const generateURL = () => {
+          let dataStr = "";
+          for (let key in params) {
+            dataStr += `${key}=${params[key]}&`;
+          }
+          dataStr += `callback=${callbackName}`;
+          return `${url}?${dataStr}`;
+        };
+        return new Promise((resolve, reject) => {
+          // 初始化回调函数名称
+          callbackName = callbackName || 'cb' + Math.random().toString().replace('.','');
+          let scriptEle = document.createElement("script");
+          scriptEle.src = generateURL();
+          document.body.appendChild(scriptEle);
+          
+          // 绑定到 window 上，为了后面调用
+          window[callbackName] = data => {
+            resolve(data);
+            // script 执行完了，成为无用元素，需要清除
+            document.body.removeChild(scriptEle);
+          };
+        });
+      };
+
+      jsonp({
+        url: "http://127.0.0.1:8000/",
+        params: {
+          name: "Yang Min",
+          age: "8"
+        },
+        callbackName: 'getData'
+      })
+        .then(data => JSON.parse(data))
+        .then(data => {
+          console.log(data);    // {name: "Yang Min", age: "8"}
+        });
     </script>
   </body>
 </html>
