@@ -7,40 +7,54 @@
   </head>
   <body>
     <h1>文件上传</h1>
-    <form id="formname"> 
+    <form id="formname">
       <input type="text" name="username" />
       <input type="password" name="password" />
       <input type="file" name="filename" value="Upload" />
       <input type="submit" name="submit" value="Submit" />
     </form>
+
     <script>
-      const formname = document.getElementById("formname");
-      formname.addEventListener("click", e => {
-        const name = e.target.name;
-        if(name === 'submit') {
-          e.preventDefault();
-          submitEvent();
+      const formname = document.getElementById('formname')
+      formname.addEventListener('click', e => {
+        const name = e.target.name
+        if (name === 'submit') {
+          e.preventDefault()
+          submitEvent()
         }
-      });
+      })
 
       function submitEvent() {
-        const url = "/form";
-        const data = { username: "example" };
+        const url = '/form'
+        const data = { username: 'example' }
         const myHeaders = new Headers({
-          "Content-Type": "application/x-www-form-urlencoded"
-        });
+          'Content-Type': 'application/x-www-form-urlencoded',
+        })
 
         fetch(url, {
-          method: "POST",
+          method: 'POST',
           headers: myHeaders,
           body: 'foo=bar&blah=1',
-          mode: "cors"
+          mode: 'cors',
         })
           .then(res => res.json())
           .then(res => {
-            console.log(res); 
-          });
+            console.log(res)
+          })
       }
+
+      fetch('/test', {
+        method: 'get',
+        cache: 'force-cache',
+        headers: {
+          'content-type': 'application/json',
+          // Pragma: 'no-cache',
+        },
+      })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res)
+        })
     </script>
   </body>
 </html>
