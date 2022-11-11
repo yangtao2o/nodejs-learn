@@ -1,0 +1,19 @@
+{
+  "name": "read-file",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js node --trace-warnings",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "file-type": "^17.1.6",
+    "jszip": "^3.10.1",
+    "nodemon": "^2.0.19"
+  }
+}
