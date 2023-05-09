@@ -1,0 +1,13 @@
+{
+  "saveLoop": false,
+  "willClose": false,
+  "userDataPath": "/Users/apple/Library/Application Support/zhiximind-desktop",
+  "themeMode": "light",
+  "_distinct_id": "kx3c0bd1202190d62060707a2f61d4e1c9",
+  "newUserGuideInfo": "[{\"position\":\"home\",\"step\":0},{\"position\":\"web\",\"step\":0}]",
+  "userPreference": {
+    "closeApp": "3"
+  },
+  "skipVersion": "3.0.0.0",
+  "expire_time": "2023-09-20 23:59:59"
+}
